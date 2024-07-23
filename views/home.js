@@ -75,7 +75,7 @@ export default function HomeScreen() {
             body: raw,
         };
 
-        fetch("http://172.21.136.107:5000/api/validate-token", requestOptions)
+        fetch("https://api-pi-senac.azurewebsites.net/api/validate-token", requestOptions)
             .then((response) => response.json())
             .then((data) => {
                 setUser(data.decoded.data);

@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { View, StyleSheet, FlatList, Text } from 'react-native';
+import { View, Text, StyleSheet, FlatList } from "react-native"
 import MenuScreen from '../components/menu';
 import * as SecureStore from 'expo-secure-store';
+import * as React from 'react';
 import moment from 'moment'
 
-const PodologoScreen = () => {
+export const PacienteScreen = () => {
     async function GetItemLocalStorage(key) {
         try {
             const value = await SecureStore.getItemAsync(key);
@@ -17,12 +17,12 @@ const PodologoScreen = () => {
 
     const [dataTable, setDataTable] = React.useState()
 
-    // INICIO GET DE PODOLOGO
+    // INICIO GET DE PACIENTE
     React.useEffect(() => {
-        fetchPodologo();
+        fetchPaciente();
     }, []);
 
-    async function fetchPodologo() {
+    async function fetchPaciente() {
         const myHeaders = new Headers();
         const token = await GetItemLocalStorage('token');
 
@@ -38,10 +38,10 @@ const PodologoScreen = () => {
             headers: myHeaders,
         };
 
-        fetch("https://api-pi-senac.azurewebsites.net/podologo", requestOptions)
+        fetch("https://api-pi-senac.azurewebsites.net/paciente", requestOptions)
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error('Falha em listar os Podologos');
+                    throw new Error('Falha em listar os Pacientes');
                 }
                 return response.json();
             })
@@ -50,10 +50,10 @@ const PodologoScreen = () => {
             })
             .catch((error) => console.error(error));
     }
-    // FIM GET DE PODOLOGO
+    // FIM GET DE PACIENTE
 
     return (
-        <>
+        <View >
             <View style={{ height: 60 }}>
                 <MenuScreen />
             </View>
@@ -63,7 +63,7 @@ const PodologoScreen = () => {
                     renderItem={({ item }) =>
                         <View style={styles.table}>
                             <View style={styles.body}>
-                                
+
                                 <View >
                                     <View style={styles.head}>
                                         <Text style={styles.headCell}>{item.nomeCompleto}</Text>
@@ -84,9 +84,10 @@ const PodologoScreen = () => {
                     keyExtractor={item => item.key}
                 />
             </View>
-        </>
-    );
-};
+        </View>
+    )
+}
+
 
 const styles = StyleSheet.create({
     container: {
@@ -107,7 +108,6 @@ const styles = StyleSheet.create({
         width: '100%',
         display: 'flex',
         flexDirection: 'row',
-        // justifyContent: 'space-around',
         borderColor: '#c2c2c2',
         marginTop: 1
 
@@ -125,8 +125,6 @@ const styles = StyleSheet.create({
         width: '100%',
         width: '100%',
         marginVertical: 10,
-        // borderBottomWidth: 1,
-        // borderBottomColor: '#f2f2f2'
     },
     headCell: {
         fontSize: 18
@@ -137,4 +135,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default PodologoScreen;
+export default PacienteScreen

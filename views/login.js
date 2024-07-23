@@ -50,7 +50,7 @@ export default function LoginScreen({ navigation }) {
         headers: myHeaders,
         body: raw
       };
-      const resp = await fetch("http://172.21.136.107:5000/login"
+      const resp = await fetch("https://api-pi-senac.azurewebsites.net/login"
         , requestOptions)
       const bodyResp = await resp.json()
       const token = bodyResp.token
