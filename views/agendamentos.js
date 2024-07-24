@@ -62,7 +62,7 @@ export const AgendamentoScreen = () => {
                 <FlatList
                     data={dataTable}
                     renderItem={({ item }) =>
-                        <View style={styles.table}>
+                        <View key={item.id} style={styles.table}>
                             <View style={styles.body}>
 
                                 <View >
