@@ -62,9 +62,8 @@ export const AgendamentoScreen = () => {
                 <FlatList
                     data={dataTable}
                     renderItem={({ item }) =>
-                        <View key={item.id} style={styles.table}>
+                        <View style={styles.table}>
                             <View style={styles.body}>
-
                                 <View >
                                     <View style={styles.head}>
                                         <Text style={styles.headCell}>{new Date(item.dataHora).toLocaleDateString('pt-br')} {new Date(item.dataHora).toLocaleTimeString('pt-br')}</Text>
@@ -76,11 +75,10 @@ export const AgendamentoScreen = () => {
                                         <Text style={styles.cell}><Text style={{ fontWeight: 'bold' }}>Situação:</Text> {item.situacao}</Text>
                                     </View>
                                 </View>
-
                             </View>
                         </View>
                     }
-                    keyExtractor={item => item.key}
+                    keyExtractor={item => `${item.key}-${item.podologo.cpf}`}
                 />
             </View>
         </View>

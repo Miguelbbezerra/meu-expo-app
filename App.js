@@ -7,6 +7,7 @@ import HomeScreen from './views/home.js'
 import PacienteScreen from './views/pacientes.js';
 import AgendamentoScreen from './views/agendamentos.js';
 import PerfilScreen from './views/perfil.js';
+import AddPaciente from './components/addPaciente.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ export default function App() {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Podologos" component={PodologoScreen} />
         <Stack.Screen name="Pacientes" component={PacienteScreen} />
+        <Stack.Screen name="Adicionar Paciente" component={AddPaciente} />
         <Stack.Screen name="Agendamentos" component={AgendamentoScreen} />
         <Stack.Screen name="Perfil" component={PerfilScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />

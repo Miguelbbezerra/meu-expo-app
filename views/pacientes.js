@@ -1,10 +1,11 @@
-import { View, Text, StyleSheet, FlatList } from "react-native"
+import { View, Text, StyleSheet, FlatList, TouchableWithoutFeedback } from "react-native"
 import MenuScreen from '../components/menu';
 import * as SecureStore from 'expo-secure-store';
 import * as React from 'react';
 import moment from 'moment'
 
-export const PacienteScreen = () => {
+const PacienteScreen = ({navigation}) => {
+
     async function GetItemLocalStorage(key) {
         try {
             const value = await SecureStore.getItemAsync(key);
@@ -57,14 +58,22 @@ export const PacienteScreen = () => {
             <View style={{ height: 60 }}>
                 <MenuScreen />
             </View>
+
             <View style={styles.container}>
+                <TouchableWithoutFeedback
+                    onPress={() => navigation.navigate("Adicionar Paciente")}>
+                    <View>
+                        <Text style={{ color: '#263eb5', borderWidth: 1, borderColor: '#263eb5', textAlign: 'center', borderRadius: 6, marginVertical: 10, padding: 10}}>
+                            Adicionar Paciente
+                        </Text>
+                    </View>
+                </TouchableWithoutFeedback>
                 <FlatList
                     data={dataTable}
                     renderItem={({ item }) =>
-                        <View key={item.id} style={styles.table}>
+                        <View style={styles.table}>
                             <View style={styles.body}>
-
-                                <View >
+                                <View>
                                     <View style={styles.head}>
                                         <Text style={styles.headCell}>{item.nomeCompleto}</Text>
                                     </View>
@@ -81,7 +90,7 @@ export const PacienteScreen = () => {
                             </View>
                         </View>
                     }
-                    keyExtractor={item => item.key}
+                    keyExtractor={item => `${item.key}-${item.cpf}`}
                 />
             </View>
         </View>

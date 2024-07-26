@@ -6,8 +6,8 @@ import * as SecureStore from 'expo-secure-store'
 export default function LoginScreen({ navigation }) {
 
   const [dataLogin, setDataLogin] = React.useState({
-    email: '',
-    senha: ''
+    email: 'carlosmiguelcm820@gmail.com',
+    senha: 'Teste12@'
   })
 
   function updateUsername(value) {

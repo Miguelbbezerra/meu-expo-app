@@ -61,7 +61,7 @@ const PodologoScreen = () => {
                 <FlatList
                     data={dataTable}
                     renderItem={({ item }) =>
-                        <View key={item.id} style={styles.table}>
+                        <View style={styles.table}>
                             <View style={styles.body}>
                                 <View >
                                     <View style={styles.head}>
@@ -76,11 +76,10 @@ const PodologoScreen = () => {
                                         <Text style={styles.cell}><Text style={{ fontWeight: 'bold' }}>CEP:</Text> {item.cep}</Text>
                                     </View>
                                 </View>
-
                             </View>
                         </View>
                     }
-                    keyExtractor={item => item.key}
+                    keyExtractor={item => `${item.key}-${item.cpf}`}
                 />
             </View>
         </>
