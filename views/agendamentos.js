@@ -78,7 +78,7 @@ export const AgendamentoScreen = () => {
                             </View>
                         </View>
                     }
-                    keyExtractor={item => `${item.key}-${item.podologo.cpf}`}
+                    keyExtractor={item => `${item.key}-${item.dataHora}`}
                 />
             </View>
         </View>
