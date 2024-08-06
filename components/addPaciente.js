@@ -118,7 +118,7 @@ const AddPaciente = () => {
                         </View>
                     </View>
                     <TouchableOpacity style={styles.button} onPress={() => handleSubmit()}>
-                        <Text style={styles.buttonText}>Change password</Text>
+                        <Text style={styles.buttonText}>Adicionar</Text>
                     </TouchableOpacity>
                 </View>
 
