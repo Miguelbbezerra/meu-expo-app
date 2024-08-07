@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { getHeaders } from './header/headears';
+import DatePicker from 'react-native-date-picker';
 
-const AddPaciente = () => {
+const AddPaciente = ({ navigation }) => {
 
+    const [date, setDate] = useState(new Date());
     const [formData, setFormData] = useState({
         nomeCompleto: '',
         genero: '',
-        dataNascimento: '',
+        dataNascimento: new Date('2005-08-29'),
         cpf: '',
         email: '',
         telefone: '',
@@ -23,8 +26,24 @@ const AddPaciente = () => {
         setFormData(newFormData)
     }
 
-    const handleSubmit = () => {
-
+    const handleSubmit = async () => {
+        try {
+            const raw = JSON.stringify(formData)
+            const response = await fetch('https://api-pi-senac.azurewebsites.net/paciente', {
+                method: 'POST',
+                headers: getHeaders(),
+                body: raw,
+                redirect: 'follow'
+            })
+            if (!response.ok) {
+                const errorData = await response.json();
+                // alert(`${errorData.message}` || 'Erro ao salvar o paciente!');
+                throw new Error(errorData.message || 'Erro ao salvar o paciente');
+            }
+            navigation.navigate('Pacientes')
+        } catch (error) {
+            alert(`${error.message}` || 'Erro ao salvar o paciente!');
+        }
     }
 
     return (
@@ -44,12 +63,7 @@ const AddPaciente = () => {
                         style={styles.input}
                     />
                     <Text style={styles.label}>Data de Nascimento</Text>
-                    <TextInput
-                        value={formData.dataNascimento}
-                        onChange={(event) => setValueFormOnChange(event, 'dataNascimento')}
-                        style={styles.input}
-                        placeholder="__/__/____"
-                    />
+
                     <Text style={styles.label}>CPF</Text>
                     <TextInput
                         value={formData.cpf}
